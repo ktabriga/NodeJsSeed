@@ -1,13 +1,10 @@
 var configuracaoPadrao = require('./configuracao/padrao'),
 	api = require('./api'),
 	aplicacao = require('./biblioteca/aplicacao'),
-	http = require('http');
+	bancoDados = requrie('./biblioteca/conexaoMongo');
 
 module.exports = function () {
-	var app = aplicacao(api);
-	
-	http.createServer(, configuracaoPadrao.porta, function () {
-		console.log("Serviço rodando na porta "+ configuracaoPadrao.porta);
-	});
-}
+	bancoDados(configuracaoPadrao);
+	var app = aplicacao(api);	
+};
 
