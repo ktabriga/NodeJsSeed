@@ -1,21 +1,21 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
-  errorHandler = require('error-handler'),
+  errorHandler = require('errorhandler'),
   morgan = require('morgan'),
   path = require('path');
 
-function configuracaoExpress(configuracao, api) {
+module.exports = function aplicacao(configuracao, api) {
   var app = module.exports = express();
-  var raiz = path.resolve(__dirname).split('/node_modules')[0];
+  var raiz = path.resolve('node_modules').replace('node_modules', '');
 
   /**
   * Configuração do ambiente
   */
-  app.set('port', process.env.PORT || 3000);
+  app.set('porta', process.env.PORT || configuracao.porta);
   app.set('views', path.join(raiz, configuracao.caminhoTemplates) );
   app.set('view engine', 'jade');
   app.use(morgan('dev'));
-  app.use(bodyParser());
+  app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname, 'public')));
 
   var env = process.env.NODE_ENV || 'development';
@@ -23,7 +23,7 @@ function configuracaoExpress(configuracao, api) {
   app.use(api());
 
   if (env === 'development') {
-    app.use(express.errorHandler());
+    app.use(errorHandler());
   }
 
   if (env === 'production') {

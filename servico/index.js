@@ -1,10 +1,12 @@
 var configuracaoPadrao = require('./configuracao/padrao'),
-	api = require('./api'),
+	api = require('./api/rotas'),
 	aplicacao = require('./biblioteca/aplicacao'),
-	bancoDados = requrie('./biblioteca/conexaoMongo');
+	bancoDados = require('./biblioteca/conexaoMongo');
 
 module.exports = function () {
 	bancoDados(configuracaoPadrao);
-	var app = aplicacao(api);	
+	var app = aplicacao(configuracaoPadrao, api);	
+
+	return app;
 };
 

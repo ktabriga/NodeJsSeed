@@ -11,5 +11,5 @@ module.exports = function (configuracao) {
 
 	db.on('error', function (erro) {
 		console.log('Erro de conexão', erro);
-	})
+	});
 };
