@@ -1,0 +1,5 @@
+{
+  "directory": "cliente/components/",
+  "analytics": false,
+  "timeout": 120000
+}
