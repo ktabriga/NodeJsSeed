@@ -23,7 +23,10 @@ module.exports = function aplicacao(configuracao, api) {
   app.use(api());
 
   if (env === 'development') {
-    app.use(errorHandler());
+    app.use(function (status, req, res, next) {
+      console.log(status, next);
+      res.send(status);
+    });
   }
 
   if (env === 'production') {
