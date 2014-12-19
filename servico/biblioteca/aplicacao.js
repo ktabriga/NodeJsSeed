@@ -16,7 +16,7 @@ module.exports = function aplicacao(configuracao, api) {
   app.set('view engine', 'jade');
   app.use(morgan('dev'));
   app.use(bodyParser.json());
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(raiz, configuracao.caminhoCliente)));
 
   var env = process.env.NODE_ENV || 'development';
 
@@ -32,4 +32,4 @@ module.exports = function aplicacao(configuracao, api) {
 
 
   return app;
-}
+};

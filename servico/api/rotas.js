@@ -1,10 +1,9 @@
-var router = require('express').Router();
+var router = require('express').Router(),
+  template = require('./template/templateControlador');
 
 module.exports = function () {
-	
-	router.get('/', function olaMundo(req, res) {
-		res.send('olaMundo');
-	});
+  router.use(template());
 
-	return router;
+
+  return router;
 };
