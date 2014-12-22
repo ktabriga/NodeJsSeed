@@ -2,7 +2,8 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   errorHandler = require('errorhandler'),
   morgan = require('morgan'),
-  path = require('path');
+  path = require('path'),
+  erroMiddleware = require('../middleware/Erro');
 
 module.exports = function aplicacao(configuracao, api) {
   var app = module.exports = express();
@@ -23,7 +24,7 @@ module.exports = function aplicacao(configuracao, api) {
   app.use(api());
 
   if (env === 'development') {
-    app.use(errorHandler());
+    app.use(erroMiddleware());
   }
 
   if (env === 'production') {
