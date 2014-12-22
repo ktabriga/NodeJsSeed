@@ -5,7 +5,7 @@ module.exports = function () {
   router.use(template());
 
   router.get('/teste', function (req, res, next) {
-    next('fudeu');
+    next(new Error('fudeu'));
   });
 
   return router;

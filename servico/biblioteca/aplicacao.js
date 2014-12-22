@@ -3,7 +3,7 @@ var express = require('express'),
   errorHandler = require('errorhandler'),
   morgan = require('morgan'),
   path = require('path'),
-  erroMiddleware = require('../middleware/Erro');
+  erroMiddleware = require('../middleware/erroMiddleware');
 
 module.exports = function aplicacao(configuracao, api) {
   var app = module.exports = express();
