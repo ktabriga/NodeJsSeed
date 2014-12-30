@@ -4,7 +4,7 @@ var expect = require('expect.js');
 describe('Tratar resultados', function () {
 
   it('obter resultado de uma busca', function (done) {
-    //simula o próximo middleware a ser executado
+    //simula o próximo middleware a ser executadoç
     function next(erro) {
       done('erro');
     }
@@ -15,13 +15,13 @@ describe('Tratar resultados', function () {
         done();
       });
 
-    buscarPessoa(undefined, {});
+    buscarPessoa(undefined, {});gi
 
   });
 
   it('tratar erro', function (done) {
 
-    //simular proximo middleare a ser executado, no caso é criado uma funão para teste
+    //simular proximo middleware a ser executado, no caso é criado uma função para teste
     function next(erro) {
       expect(erro).to.be.a('object');
       done();
