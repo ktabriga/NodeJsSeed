@@ -2,7 +2,8 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   errorHandler = require('errorhandler'),
   morgan = require('morgan'),
-  path = require('path');
+  path = require('path'),
+  erroMiddleware = require('../middleware/erroMiddleware');
 
 module.exports = function aplicacao(configuracao, api) {
   var app = module.exports = express();
@@ -16,17 +17,14 @@ module.exports = function aplicacao(configuracao, api) {
   app.set('view engine', 'jade');
   app.use(morgan('dev'));
   app.use(bodyParser.json());
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(raiz, configuracao.caminhoCliente)));
 
   var env = process.env.NODE_ENV || 'development';
 
   app.use(api());
 
   if (env === 'development') {
-    app.use(function (status, req, res, next) {
-      console.log(status, next);
-      res.send(status);
-    });
+    app.use(erroMiddleware());
   }
 
   if (env === 'production') {
@@ -35,4 +33,4 @@ module.exports = function aplicacao(configuracao, api) {
 
 
   return app;
-}
+};

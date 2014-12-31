@@ -3,5 +3,6 @@
     "mongodb":{
         "uri":"mongodb://localhost/aplicacao"
     },
-    "caminhoTemplates": "\\cliente\\templates"
+    "caminhoTemplates": "\\cliente\\templates",
+    "caminhoCliente": "\\cliente"
 }
