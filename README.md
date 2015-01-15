@@ -20,10 +20,7 @@ Armazenamento das informações referentes ao projeto DSC, tais como:
 
 * Abra o terminal do seu S.O e navegue até a pasta onde está o seu projeto
 * Execute o comando npm install -g
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Execute o comando npm start para iniciar o servidor :)
 
 ### Dúvidas, sugestões ? ###
 
