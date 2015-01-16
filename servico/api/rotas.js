@@ -11,7 +11,7 @@ module.exports = function () {
   /*
     Para as demais urls rederizar a index do cliente 
   */
-  router.get('/*', function (req, res, next) {
+  router.get('*', function (req, res, next) {
     res.render('index.jade');
   });
   
