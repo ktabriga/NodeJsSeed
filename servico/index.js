@@ -6,7 +6,6 @@ var configuracaoPadrao = require('./configuracao/padrao'),
 module.exports = function () {
 	bancoDados(configuracaoPadrao);
 	var app = aplicacao(configuracaoPadrao, api);	
-
 	return app;
 };
 
