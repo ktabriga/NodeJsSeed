@@ -1,0 +1,63 @@
+<form class="form-horizontal" data-ng-submit="ctrl.submit()" name="userForm">
+	<fieldset>
+		<legend>Criar um novo usuário</legend>
+		<div class="form-group">
+			<label for="registration" class="col-lg-2 control-label">Matricula</label>
+			<div class="col-lg-6">
+				<input type="text" name="registration" class="form-control" data-ng-model="ctrl.user.registration" data-ng-model-options="{ debounce: 2000 }" data-unique data-unique-service="UserService" data-unique-column="registration" required>
+			</div>
+			<div class="col-lg-4">
+				<span class="text-success" data-ng-show="userForm.registration.$dirty && !userForm.registration.$error.unique">
+					<i class="fa fa-check"></i>
+					Matricula válida!
+				</span>
+				<span class="text-danger" data-ng-show="userForm.registration.$error.unique">
+					<i class="fa fa-warning"></i>
+					Ops... Esta matricula já existe em nosso banco de dados.
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="email" class="col-lg-2 control-label">E-mail</label>
+			<div class="col-lg-6">
+				<input type="email" name="email" class="form-control" data-ng-model="ctrl.user.email" data-unique data-unique-service="UserService" data-unique-column="email" required>
+			</div>
+			<div class="col-lg-4">
+				<span class="text-success" data-ng-show="userForm.email.$dirty && !userForm.email.$error.unique">
+					<i class="fa fa-check"></i>
+					E-mail válido!
+				</span>
+				<span class="text-danger" data-ng-show="userForm.email.$error.unique">
+					<i class="fa fa-warning"></i>
+					Ops... Este e-mail já existe em nosso banco de dados.
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pass" class="col-lg-2 control-label">Senha</label>
+			<div class="col-lg-10">
+				<input type="password" name="pass" class="form-control" data-ng-model="ctrl.user.pass" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="name" class="col-lg-2 control-label">Nome</label>
+      <div class="col-lg-10">
+				<input type="text" name="name" class="form-control" data-ng-model="ctrl.user.name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="role" class="col-lg-2 control-label">Cargo</label>
+      <div class="col-lg-10">
+				<select name="role" class="form-control" data-ng-model="ctrl.user.role" data-ng-options="role.value as role.label for role in ctrl.roles" required>
+					<option value="">-- Escolha o cargo --</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-10 col-lg-offset-2">
+				<button type="submit" class="btn btn-primary" data-ng-disabled="userForm.$invalid">Salvar</button>
+				<button type="reset" class="btn btn-default" data-ng-click="ctrl.reset()">Limpar</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
