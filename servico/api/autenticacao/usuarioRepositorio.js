@@ -2,33 +2,36 @@
 
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  passwordHash = require('password-hash');
+  q = require('Q');
+
+module.exports = Repositorio;
 
 var UsuarioSchema = Schema({
   nome: {
     type: String,
-    default: 'nome.nome',
-    unique: true,
+    required: 'nome.obrigagatorio',
     trim: true
   },
 
   senha: {
     type: String,
-    default: 'senha.obrigagatorio'
+    required: 'senha.obrigagatorio'
   },
 
   email: {
     type: String,
     required: 'email.obrigatorio',
-    trim: true
+    trim: true,
+    unique: true
   },
-  role: {
+
+  privilegio: {
     type: String,
     enum: ['USUARIO','ADMINISTRADOR'],
     default: 'USER'
   },
 
-  linguage: {
+  linguagem: {
     type: String,
     enum: ['PT-BR', 'US-EN', 'ES-ES'],
     default: 'US-EN'
@@ -40,54 +43,26 @@ UsuarioSchema.pre('save', function (next) {
   next();
 });
 
-UsuarioSchema.statics.autenticar = function (dadosUsuario, sucessoCallback, erroCallback) {
-  console.log(dadosUsuario);
-
-  var consulta = {
-    name: dadosUsuario.name
-  };
-
-  this.findOne(consulta, function (erro, usuario) {
-    if (erro) {
-      return erroCallback(erro);
-    }
-
-    if(!usuario || !senhaValida(dadosUsuario.password)) {
-      return erroCallback(new Error('invalid password'));
-    }
-
-    sucessoCallback(usuario);
-  });
-};
-
 var Usuario = mongoose.model('Usuario', UsuarioSchema);
-module.exports = Usuario;
 
-function  criarUsuarioPadrao() {
-  var dadosUsuario = {
-      nome: 'admin',
-      senha: '1',
-      email: 'mentor@gmail.com'
-    },
-    query = {nome: 'admin'},
-    self = this;
+function Repositorio() {
+  this. buscarUsuarioPorEmail= buscarUsuarioPorEmail;
 
-  Usuario.findOne(query, function (err, user) {
-    if (err) {
-      console.log(err);
-    }
+  function buscarUsuarioPorEmail(email) {
+    var diferir = q.defer(),
+      consulta = {
+        email: email
+      };
 
-    if (user) {
-      console.log('admin user found');
-      return;
-    }
+    Usuario.findOne(consulta, function (erro, usuario) {
+      if (erro) {
+        return diferir.reject(erro);
+      }
 
-    new self(dadosUsuario).save();
-    console.log('admin user created');
-  });
+      diferir.resolve(usuario);
+    });
 
-};
+    return diferir.promise;
+  }
 
-function senhaValida (senha) {
-  return passwordHash.verify(senha, this.senha);
 }

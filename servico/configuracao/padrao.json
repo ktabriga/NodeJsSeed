@@ -4,5 +4,6 @@
         "uri":"mongodb://localhost/aplicacao"
     },
     "caminhoTemplates": "\\cliente\\templates",
-    "caminhoCliente": "\\cliente"
+    "caminhoCliente": "\\cliente",
+    "segredo": "SFlkjF#g21ss35RFDSaf"
 }
