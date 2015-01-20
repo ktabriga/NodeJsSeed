@@ -1,6 +1,5 @@
-angular.module('app',[
-  'ui.router',
-  'ui.bootstrap',
+angular.module('dsc',[
+  'ui.router'
 ])
 .config(['$stateProvider','$urlRouterProvider','$httpProvider',function($stateProvider,$urlRouterProvider,$httpProvider) {
   $urlRouterProvider.otherwise("/home");
@@ -12,22 +11,6 @@ angular.module('app',[
     .state('user', {
       url: "/user",
       templateUrl: "modules/user/views/index.html"
-    })
-    .state('cycle', {
-      url: "/cycle",
-      templateUrl: "modules/cycle/views/index.html"
-    })
-    .state('idea', {
-      url: "/idea",
-      templateUrl: "modules/idea/views/index.html"
-    })
-    .state('acceptance', {
-      url: "/acceptance/:idea",
-      templateUrl: "modules/acceptance/views/index.html"
-    })
-    .state('acceptanceIdeas', {
-      url: "/acceptance",
-      templateUrl: "modules/acceptance/views/ideas.html"
     });
 }])
 .run(['$http',function($http) {
