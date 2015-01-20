@@ -45,24 +45,21 @@ UsuarioSchema.pre('save', function (next) {
 
 var Usuario = mongoose.model('Usuario', UsuarioSchema);
 
-function Repositorio() {
-  this. buscarUsuarioPorEmail= buscarUsuarioPorEmail;
+exports.buscarUsuarioPorEmail = function (email) {
+  var diferir = q.defer(),
+    consulta = {
+      email: email
+    };
 
-  function buscarUsuarioPorEmail(email) {
-    var diferir = q.defer(),
-      consulta = {
-        email: email
-      };
+  Usuario.findOne(consulta, function (erro, usuario) {
+    if (erro) {
+      return diferir.reject(erro);
+    }
 
-    Usuario.findOne(consulta, function (erro, usuario) {
-      if (erro) {
-        return diferir.reject(erro);
-      }
+    diferir.resolve(usuario);
+  });
 
-      diferir.resolve(usuario);
-    });
+  return diferir.promise;
+};
 
-    return diferir.promise;
-  }
 
-}

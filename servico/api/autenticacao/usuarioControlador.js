@@ -1,9 +1,8 @@
 var usuarioRepositorio = require("./usuarioRepositorio"),
-  UsuarioServico = require("./usuarioServico"),
+  usuarioServico = require("./usuarioServico"),
   router = require("express").Router();
 
 module.exports = function (configuracao) {
-  var servico = new UsuarioServico(configuracao);
 
   function autenticar(req, res, next) {
     var dadosUsuario = req.body;
@@ -14,7 +13,7 @@ module.exports = function (configuracao) {
     function verificar(usuario) {
 
       if (usuarioServico.validarSenha(usuario)) {
-        var token = usuarioServico.gerarToken(usuario);
+        var token = usuarioServico.gerarToken(usuario, configuracao);
         return res.json({
           token: token
         });
@@ -23,6 +22,9 @@ module.exports = function (configuracao) {
       next(Error("usuario.invalido"));
     }
   }
+
+
+  router.post("autenticacao", autenticar);
 };
 
 
