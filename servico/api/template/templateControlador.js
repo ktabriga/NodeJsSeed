@@ -5,10 +5,6 @@ var router = require('express').Router(),
 
 module.exports = function () {
 
-  router.get('/', function (req, res) {
-    res.render('index');
-  });
-
   router.get('/templates/:template', function (req, res) {
     var template = req.params.template;
 

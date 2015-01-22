@@ -4,8 +4,6 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   q = require('Q');
 
-module.exports = Repositorio;
-
 var UsuarioSchema = Schema({
   nome: {
     type: String,
@@ -61,5 +59,3 @@ exports.buscarUsuarioPorEmail = function (email) {
 
   return diferir.promise;
 };
-
-

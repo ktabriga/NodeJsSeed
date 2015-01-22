@@ -1,15 +1,20 @@
 var router = require('express').Router(),
-  template = require('./template/templateControlador');
+    rotasApi = require('./rotasApi'),
+    autenticacao = require('./autenticacao/usuarioControlador');
 
 module.exports = function () {
+  
+  /*
+    Quando a url conter prefixo /api direcionar para o modulo de rotas da api
+  */
+  router.use('/api', rotasApi());
 
-	
-    router.get('/', function olaMundo(req, res, next) {
-        next('usuario invalido');
-    });
-
-  router.use(template());
-
+  /*
+    Para as demais urls rederizar a index do cliente 
+  */
+  router.get('*', function (req, res, next) {
+    res.render('index.jade');
+  });
 
   return router;
 };

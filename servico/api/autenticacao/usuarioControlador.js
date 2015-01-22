@@ -1,6 +1,8 @@
-var usuarioRepositorio = require("./usuarioRepositorio"),
-  usuarioServico = require("./usuarioServico"),
-  router = require("express").Router();
+'use strict';
+
+var usuarioRepositorio = require('./usuarioRepositorio'),
+  usuarioServico = require('./usuarioServico'),
+  router = require('express').Router();
 
 module.exports = function (configuracao) {
 
@@ -19,12 +21,12 @@ module.exports = function (configuracao) {
         });
       }
 
-      next(Error("usuario.invalido"));
+      next(Error('usuario.invalido'));
     }
   }
 
-
-  router.post("autenticacao", autenticar);
+  router.post('/', autenticar);
+  return router;
 };
 
 
